@@ -1,0 +1,470 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class="stack">
+        <section>
+          <h1>Past Blast:</h1>
+          <p>Building a frontend without a framework in 2015</p>
+        </section>
+        <section>
+          <h1>Libraries are overrated</h1>
+          <p>You may not need one</p>
+        </section>
+        <section>
+          <h1>A developer's time capsule</h1>
+          <p>Why? Just. . . Why?</p>
+        </section>
+      </section>
+      <section>
+        <p>👋 I'm Hunter</p>
+        <div class="content-flex">
+          <img class="me" src="./images/me.jpg">
+          <div class="intro">
+            <ul>
+              <li>Software Dev @ League</li>
+              <li>Experience writing large scale apps in:
+                <ul>
+                  <li>Angular + AngularJS</li>
+                  <li>React</li>
+                  <li>Vue</li>
+                  <li>+ Others</li>
+                </ul>
+              </li>
+              <li>OSS contributor and maintainer</li>
+              <li>Easily bored</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h1>The game plan</h1>
+        <ul>
+          <li>The Folders Project</li>
+          <li class="fragment">FoldersJS</li>
+          <li class="fragment">
+            👶 Hunter's legacy code
+            <ul>
+              <li class="fragment">API Interaction</li>
+              <li class="fragment">Routing</li>
+              <li class="fragment">Styling</li>
+              <li class="fragment">"Models"</li>
+              <li class="fragment">Templating</li>
+              <li class="fragment">Building</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <section class="stack">
+        <section>
+          <h3>The Set Up: <span class="fragment">52 Folders</span></h3>
+          <p class="fragment">The Folders Project</p>
+          <ul>
+            <li class="fragment">Create the same app with different tech</li>
+            <li class="fragment">Share an api</li>
+            <li class="fragment">Share css</li>
+            <li class="fragment">Share common functionality</li>
+          </ul>
+          <!-- <h3 class="fragment">The app: Fast Follow</h3> -->
+
+        </section>
+        <section>
+          <h3>K, but y tho</h3>
+          <img src="images/why.gif" />
+        </section>
+        <section>
+          <h3>K, but y tho</h3>
+          <ul>
+            <li class="fragment">An easier way to play with new frameworks</li>
+            <li class="fragment">A low effort gateway to experimentation</li>
+            <li class="fragment">Allows me hands on time with all the things</li>
+            <li class="fragment">Reduces my FOMO</li>
+            <li class="fragment">It's a pandemic</li>
+          </ul>
+
+        </section>
+      </section>
+      <section class="stack">
+        <section>
+          <h3>FoldersJS</h3>
+          <img src="./images/foldersjs.gif" />
+        </section>
+        <section>
+          <h3>Oldtimey JS</h3>
+          <ul>
+            <li class="fragment">Project started in 2015 (that's 5 years ago)</li>
+            <li class="fragment">No frameworks</li>
+            <li class="fragment">No jquery</li>
+            <li class="fragment">No libraries *</li>
+            <li class="fragment">Just JS</li>
+          </ul>
+        </section>
+        <section>
+          <h1>Just to repeat. 2015</h1>
+          <h3>That's the year that ES2015 happened</h3>
+        </section>
+        <section>
+          <h1>ES6</h1>
+          <div style="display: flex;">
+            <ul>
+              <li>Let/Const</li>
+              <li>Template Strings</li>
+              <li>String Search (.includes, startsWith, endsWith)</li>
+              <li>Arrow functions</li>
+              <li>Default args</li>
+              <li>Rest parameters</li>
+              <li>Spread operator</li>
+              <li>Destructuring</li>
+              <li>For/Of loops</li>
+            </ul>
+            <ul>
+              <li>Sets</li>
+              <li>Maps</li>
+              <li>CLASSES</li>
+              <li>Object Literals</li>
+              <li>Generator</li>
+              <li>Modules</li>
+              <li>Symbols</li>
+              <li>Promises</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <img src="./images/awhile.gif" />
+        </section>
+      </section>
+      <section class="stack">
+        <section>
+          <h1>API interactions</h1>
+          <img src="./images/api.gif" />
+        </section>
+        <section>
+          <h2>No Fetch! 🚫🐶</h2>
+          <p class="fragment">Fetch was introduced in 2015</p>
+          <p class="fragment">Plenty of libraries to make api requests easier (axios)</p>
+          <p class="fragment">Frameworks at the time included http tools</p>
+          <p class="fragment">Devs had to build their own API layer</p>
+        </section>
+        <section>
+          <h2>XMLHttpRequest</h2>
+          <pre><code data-trim data-noescape>
+
+            fetch: function (path, callback) {
+            var uri = BASE_URI + "/" + path;
+            var request = new XMLHttpRequest();
+            
+              request.open("GET", uri, true);
+              request.onload = function () {
+                if (request.status >= 200 && request.status < 400) {
+                callback(JSON.parse(request.response));
+                }
+              };
+            
+              request.onerror = function () {
+                reject(new Error("Something Went wrong on the API"));
+              };
+            
+              request.send();
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h2>API.post</h2>
+          <pre><code data-trim data-noescape>
+            post: function (path, data, callback) {
+              var uri = BASE_URI + "/" + path;
+              var request = new XMLHttpRequest();
+              
+                  request.open("POST", uri, true);
+                  request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+              
+                  // ...onload and onerror handlers
+              
+                  request.send(data);
+              },
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h2>Leveraging the API layer</h2>
+          <pre><code data-trim data-noescape>
+            API.post('resources', {name: 'Folder'}, function (response){
+              console.log(response);
+            });
+          </code></pre>
+        </section>
+      </section>
+      <section class="stack">
+        <section>
+          <h1>Routing</h1>
+          <img src="./images/same.jpg" />
+        </section>
+        <section>
+          <h3>Not much has changed</h3>
+          <ul>
+            <li>A separate .html file for each route</li>
+            <li>Browsers have to fetch assets on every route change</li>
+            <li>This approach obsolete thanks to frameworks</li>
+          </ul>
+        </section>
+        <section>
+          <h3>What that means</h3>
+          <ul>
+            <li>All the JS that’s used on that page</li>
+            <li>All the styling that’s used on that page</li>
+            <li>Everything that should exist in the &lt;Head&gt; tag (including the above, and things like a title)</li>
+            <li>And a body tag for all of the content to actually go into</li>
+          </ul>
+        </section>
+        <section>
+          <h3>A bit of a pain in the behind</h3>
+          <img src="./images/butt.gif"/>
+        </section>
+      </section>
+      <section class="stack">
+        <section>
+          <h1>Styling</h1>
+          <img src="./images/css.gif" />
+        </section>
+        <section>
+          <h3>Being Sassy</h3>
+          <ul>
+            <li class="fragment">Uncommon to write "plain css"</li>
+            <li class="fragment">Sass or SCSS?!</li>
+            <li class="fragment">Both are ways to reduce duplication both of your style definitions, as well as your selectors</li>            
+        </ul>
+        </section>
+        <section>
+          <h3>In practice</h3>
+          <div style="display: flex; justify-content: space-around;">
+            <div>
+              <h4>Without SCSS</h4>
+              <pre><code data-trim data-noescape>
+              .post-title {
+                font-size: 150%;
+                font-weight: 700;
+                margin: 0;
+              }
+              .post-title img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+              }
+            </code></pre>
+
+            </div>
+            <div>
+              <h4>With SCSS</h4>
+
+          <pre><code data-trim data-noescape>
+
+              .post-title {
+                font-size: 150%;
+                font-weight: 700;
+                margin: 0;
+                img {
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                }
+              }
+                </code></pre>
+            </div>
+          </div>
+          
+        </section>
+      </section>
+      <section class="stack">
+        <section>
+          <h1>Models</h1>
+          <img src="./images/zoo.gif" />
+        </section>
+        <section>
+          <h3>Why models</h3>
+          <ul>
+            <li class="fragment">We want to abstract data operations away from the UI</li>
+            <li class="fragment">Prevent code duplication</li>
+            <li class="fragment">Create a common API for interacting with data types </li>
+            <li class="fragment">Kinda sounds like various parts of redux</li>
+          </ul>
+        </section>
+        <section>
+          <h3>The Post Model</h3>
+          <pre><code data-trim data-noescape>
+            function Post() {
+              this.posts = [];
+            }
+            
+            Post.prototype.setPosts = function (data) {
+              this.posts = data;
+            };
+            
+            Post.prototype.getPosts = function () {
+              return this.posts;
+            };
+            
+            Post.prototype.findAll = function (callback) {
+              var context = this;
+              API.fetch("posts", function (data) {
+                context.setPosts(data, callback(data));
+              });
+            };            
+          </code></pre>
+        </section>
+        <section>
+          <h3>Using the model</h3>
+          <pre><code data-trim data-noescape>
+            const post = Post()
+            post.findAll(function (posts){ 
+              console.log(posts)
+            });
+          </code></pre>
+        </section>
+      </section>
+      <section class="stack">
+        <section>
+          <h1>Templating</h1>
+          <ul>
+            <li class="fragment">Render an item in a predefined way</li>
+            <li class="fragment">Templates have very little logic</li>
+            <li class="fragment">Builds your ui from building blocks based on data</li>
+            <li class="fragment">Handlebars, moustache . . . react?!?!</li>
+          </ul>
+        </section>
+        <section>
+          <h3>This is not a post, this is a tribute</h3>
+          <pre><code data-trim data-noescape>
+            function commentTemplate(comment, index) {
+              var template;
+            
+              template =
+                "&lt;article class ='post comment" + (index % 2 === 0 ? " odd" : "") + "'&gt;";
+              template += "&lt;div class='post-title'&gt;";
+              template += "&lt;img src='" + comment.avatar + "'/&gt;";
+              template += "&lt;div&gt;";
+              template += "&lt;p&gt;&lt;strong&gt;" + comment.name + "&lt;/strong&gt;&lt;/p&gt;";
+              template += "&lt;p class='post-meta'&gt;" + comment.createdAt + "&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;";
+            
+              template += "&lt;p class='post-content'&gt;" + comment.content + "&lt;/p&gt;";
+            
+              template += "&lt;/article&gt;";
+            
+              return template;
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h3>Using a template</h3>
+          <pre><code data-trim data-noescape>
+            //Find the desired location on screen and fill it with the markdown
+            var target = document.querySelector(".comments-container");
+            target.innerHTML = elements.join("");
+          </code></pre>
+      </section>
+      </section>
+      <section class="stack">
+        <section>
+          <h1>Build Systems</h1>
+          <img src="./images/build.gif" />
+        </section>
+        <section>
+          <h3>Why a build system?</h3>
+          <ul>
+            <li class="fragment">Can keep code in separate files</li>
+            <li class="fragment">Allows for minification</li>
+            <li class="fragment">Allows SCSS</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Gulp</h3>
+          <pre><code data-trim data-noescape>
+            gulp.task("concat", function () {
+              return gulp
+                .src([
+                  "src/constants.js",
+                  "src/api.js",
+                  "src/post.js",
+                  "src/user.js",
+                  "src/*.js",
+                ])
+                .pipe(concat("bundle.js"))
+                .pipe(gulp.dest("./dist/"));
+            });
+          </code></pre>
+        </section>
+        <section>
+          <section>
+            <h3>Does this break the rules of the experiment?</h3>
+            <img src="./images/idk.gif" />
+          </section>
+      </section>
+    </section>
+      <section class="stack">
+        <section>
+          <h1>Recap</h1>
+          <ul>
+            <li class="fragment">API interactions</li>
+            <li class="fragment">Routing</li>
+            <li class="fragment">Styling</li>
+            <li class="fragment">Models</li>
+            <li class="fragment">Templating</li>
+            <li class="fragment">Build Systems</li>
+          </ul>
+        </section>
+        <section>
+          <h3>SO MUCH PROGRESS</h3>
+          <img src="./images/future.jpg" />
+        </section>
+        <section>
+          <h3>Just imagine</h3>
+          <img src="./images/pg.gif" />
+        </section>
+        <section>
+          <h3>Just imagine</h3>
+          <img src="./images/sobad.gif" />
+        </section>
+      </section>
+      <section>
+        <h1>Thanks!</h1>
+        <img src="./images/questionz.gif" />
+
+      </section>
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+      pdfSeparateFragments: false,
+
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>
